@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { addCourse, deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
 
-const coursesSlice = createSlice({
+export const coursesSlice = createSlice({
   name: 'auth',
   initialState: {
     courses: [],
@@ -50,4 +50,3 @@ const coursesSlice = createSlice({
 });
 
 // export const { addCourse, updateCourse, fetchCourse, fetchCourses } = coursesSlice.actions;
-export default coursesSlice.reducer;

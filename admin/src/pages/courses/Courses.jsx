@@ -4,20 +4,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { fetchCourses } from '../../features/courses/coursesThunk';
+import { COLUMNS } from './Courses.const';
 
-import './Courses.scss';
-const Courses = () => {
+import { fetchCourses } from '~features/courses/coursesThunk';
+
+export const Courses = () => {
   const dispatch = useDispatch();
-  const { courses = [], status } = useSelector(state => state.courses);
-
-  const columns = [
-    { field: 'title', headerName: 'Title', width: 130 },
-    { field: 'description', headerName: 'Description', width: 250 },
-    { field: 'modules', headerName: 'Modules', width: 150 },
-    { field: 'instructor', headerName: 'Instructor', width: 150 },
-    { field: 'students', headerName: 'students', width: 150 },
-  ];
+  const { courses = [], status } = useSelector(state => state);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -52,7 +45,7 @@ const Courses = () => {
       <Paper sx={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={courses}
-          columns={columns}
+          columns={COLUMNS}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
@@ -62,5 +55,3 @@ const Courses = () => {
     </div>
   );
 };
-
-export default Courses;

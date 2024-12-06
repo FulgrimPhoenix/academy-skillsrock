@@ -1,16 +1,14 @@
 import { Outlet } from 'react-router-dom';
 
-import DashboardLayout from '../components/DashboardLayout';
+import { DashboardLayout } from '~components/DashboardLayout';
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <div>
       <h1>Admin Dashboard</h1>
       <DashboardLayout>
-        <Outlet /> {/* Renders nested routes */}
+        <Outlet />
       </DashboardLayout>
     </div>
   );
 };
-
-export default Dashboard;

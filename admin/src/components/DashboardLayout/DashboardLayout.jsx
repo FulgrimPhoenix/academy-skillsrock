@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
+import { Navbar } from '../Navbar';
+import { Sidebar } from '../Sidebar';
 
-const DashboardLayout = ({ children }) => {
+export const DashboardLayout = ({ children }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -16,5 +16,3 @@ const DashboardLayout = ({ children }) => {
     </Box>
   );
 };
-
-export default DashboardLayout;

@@ -2,25 +2,21 @@ import { Button, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addPermission, fetchPermission, updatePermission } from '../../features/permissions/permissionsThunk';
+import { addPermission, fetchPermission, updatePermission } from '../../../features/permissions/permissionsThunk';
 
-const Permission = ({ permissionId, handleClose }) => {
+export const Permission = ({ permissionId, handleClose }) => {
   const dispatch = useDispatch();
-  // Select permission state from Redux store
   const { permission = {}, status, error } = useSelector(state => state.permission);
 
-  // Local state to handle form inputs
   const [formData, setFormData] = useState({
     name: '',
     description: '',
   });
 
-  // Effect to fetch permission if `permissionId` is provided
   useEffect(() => {
     dispatch(fetchPermission(permissionId));
   }, []);
 
-  // Sync local state with Redux state when `permission` changes
   useEffect(() => {
     if (permissionId && permission) {
       setFormData({
@@ -30,14 +26,12 @@ const Permission = ({ permissionId, handleClose }) => {
     }
   }, [permissionId, permission]);
 
-  // Automatically close modal if the status becomes "succeeded"
   useEffect(() => {
     if (status === 'succeeded') {
-      handleClose(permission); // Close the modal
+      handleClose(permission);
     }
   }, [status]);
 
-  // Handle form input changes
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prevData => ({
@@ -46,7 +40,6 @@ const Permission = ({ permissionId, handleClose }) => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = e => {
     e.preventDefault();
     if (permissionId) {
@@ -82,5 +75,3 @@ const Permission = ({ permissionId, handleClose }) => {
     </form>
   );
 };
-
-export default Permission;

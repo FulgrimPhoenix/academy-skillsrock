@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { addUser, deleteUser, fetchUser, fetchUsers, updateUser } from './usersThunk';
 
-const usersSlice = createSlice({
+export const usersSlice = createSlice({
   name: 'users',
   initialState: {
     users: [],
@@ -40,4 +40,3 @@ const usersSlice = createSlice({
 });
 
 export const { addOrUpdateUser } = usersSlice.actions;
-export default usersSlice.reducer;

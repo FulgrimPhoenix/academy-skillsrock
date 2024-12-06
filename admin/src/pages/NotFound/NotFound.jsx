@@ -1,6 +1,6 @@
 import { Typography, Container } from '@mui/material';
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <Container>
       <Typography variant="h2" align="center" color="textSecondary">
@@ -12,5 +12,3 @@ const NotFound = () => {
     </Container>
   );
 };
-
-export default NotFound;

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchPermissions } from './permissionsThunk';
 
-const permissionsSlice = createSlice({
+export const permissionsSlice = createSlice({
   name: 'permissions',
   initialState: {
     permissions: [],
@@ -40,4 +40,3 @@ const permissionsSlice = createSlice({
 });
 
 export const { addOrUpdatePermission } = permissionsSlice.actions;
-export default permissionsSlice.reducer;

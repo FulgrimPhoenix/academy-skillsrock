@@ -2,9 +2,9 @@ import { TextField, Button, Paper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addCourse } from '../../features/courses/coursesThunk';
+import { addCourse } from '~features/courses/coursesThunk';
 
-const Course = () => {
+export const Course = () => {
   const dispatch = useDispatch();
 
   const [courseData, setCourseData] = useState({
@@ -88,5 +88,3 @@ const Course = () => {
     </Paper>
   );
 };
-
-export default Course;

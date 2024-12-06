@@ -10,13 +10,15 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Permission from './Permission';
-import { resetState } from '../../features/permissions/permissionSlice';
-import { addOrUpdatePermission } from '../../features/permissions/permissionsSlice';
-import { fetchPermissions } from '../../features/permissions/permissionsThunk';
-import './Permissions.scss';
 
-const Permissions = () => {
+import { resetState } from '~features/permissions/permissionSlice';
+import { addOrUpdatePermission } from '~features/permissions/permissionsSlice';
+import { fetchPermissions } from '~features/permissions/permissionsThunk';
+
+export const Permissions = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [selectedPermissionId, setSelectedPermissionId] = useState(null);
   const {
     permissions = [],
     status,
@@ -24,10 +26,6 @@ const Permissions = () => {
   } = useSelector(state => {
     return state.permissions;
   });
-
-  // State to track modal visibility and selected permissionId
-  const [open, setOpen] = useState(false);
-  const [selectedPermissionId, setSelectedPermissionId] = useState(null);
 
   const columns = [
     { field: 'name', headerName: 'Title', width: 300 },
@@ -45,18 +43,11 @@ const Permissions = () => {
           >
             <EditIcon />
           </IconButton>
-          {/*<IconButton*/}
-          {/*    color="secondary"*/}
-          {/*    onClick={() => onDelete(params.row.id)} // Pass row ID to onDelete*/}
-          {/*>*/}
-          {/*    <DeleteIcon />*/}
-          {/*</IconButton>*/}
         </>
       ),
     },
   ];
 
-  // Close modal
   const handleClose = permission => {
     setOpen(false);
     dispatch(resetState());
@@ -75,10 +66,9 @@ const Permissions = () => {
     return row._id;
   };
 
-  // Handle row click to open modal
   const handleRowClick = permissionId => {
-    setSelectedPermissionId(permissionId); // Store the selected permissionId
-    setOpen(true); // Open the modal
+    setSelectedPermissionId(permissionId);
+    setOpen(true);
   };
 
   return (
@@ -108,11 +98,9 @@ const Permissions = () => {
             getRowId={getRowId}
             rows={permissions}
             columns={columns}
-            // checkboxSelection
             sx={{ width: '100%', border: 0 }}
           />
 
-          {/* Modal to show Permission component */}
           {open ? (
             <Dialog
               open={open}
@@ -145,5 +133,3 @@ const Permissions = () => {
     </Paper>
   );
 };
-
-export default Permissions;

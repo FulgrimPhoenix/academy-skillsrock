@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const dashboardSlice = createSlice({
+export const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState: {
     sidebarOpen: true,
@@ -12,4 +12,3 @@ const dashboardSlice = createSlice({
   },
 });
 export const { toggleSidebar } = dashboardSlice.actions;
-export default dashboardSlice.reducer;
