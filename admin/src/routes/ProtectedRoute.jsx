@@ -4,8 +4,7 @@ import useAuth from '../hooks/useAuth';
 
 const ProtectedRoute = ({ component: Component }) => {
   const { isAuthenticated } = useAuth();
-  // return isAuthenticated ? <Component /> : <Navigate to="/login" />;
-  return <Component />;
+  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

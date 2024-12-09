@@ -1,16 +1,14 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { Toolbar, Typography, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { NavbarRoot } from './Navbar.styles';
 
 import { logout } from '~features/auth/authSlice';
-import { toggleSidebar } from '~features/dashboard/dashboardSlice';
 
-export const Navbar = () => {
+export const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
   const dispatch = useDispatch();
-  const { sidebarOpen } = useSelector(state => state.dashboard);
 
   const handleLogout = e => {
     e.preventDefault();
@@ -18,7 +16,7 @@ export const Navbar = () => {
   };
 
   const handleDrawerOpen = () => {
-    dispatch(toggleSidebar(sidebarOpen));
+    setSidebarOpen(prev => !prev);
   };
 
   return (
@@ -26,16 +24,13 @@ export const Navbar = () => {
       <Toolbar sx={{ flexGrow: 1 }}>
         <IconButton
           color="inherit"
-          A
           aria-label="open drawer"
           onClick={handleDrawerOpen}
           edge="start"
-          sx={[
-            {
-              marginRight: 5,
-            },
-            sidebarOpen && { display: 'none' },
-          ]}
+          sx={{
+            marginRight: 5,
+            ...(sidebarOpen && { display: 'none' }),
+          }}
         >
           <MenuIcon />
         </IconButton>

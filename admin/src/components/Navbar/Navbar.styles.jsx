@@ -15,7 +15,6 @@ export const NavbarRoot = styled(MuiAppBar, {
     {
       props: ({ open }) => open,
       style: {
-        marginLeft: DRAWER_WIDTH,
         width: `calc(100% - ${DRAWER_WIDTH}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,

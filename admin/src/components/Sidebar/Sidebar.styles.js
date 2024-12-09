@@ -1,27 +1,25 @@
 import { styled } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 
-import { DRAWER_WIDTH } from './Sidebar.const';
+const DRAWER_WIDTH = 240;
+const COLLAPSED_WIDTH = 60;
 
 const openedMixin = theme => ({
   width: DRAWER_WIDTH,
+  overflow: 'hidden',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: 'hidden',
 });
 
 const closedMixin = theme => ({
+  overflow: 'hidden',
+  width: COLLAPSED_WIDTH,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
 });
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
@@ -32,25 +30,20 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export const SidebarDrawerRoot = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(({ theme }) => ({
-  width: DRAWER_WIDTH,
+export const SidebarDrawerRoot = styled(MuiDrawer, {
+  shouldForwardProp: prop => prop !== 'open',
+})(({ theme, open }) => ({
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      },
-    },
-    {
-      props: ({ open }) => !open,
-      style: {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      },
-    },
-  ],
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  zIndex: 100,
+  ...(open ? openedMixin(theme) : closedMixin(theme)),
+  '& .MuiDrawer-paper': {
+    transition: 'width 0.3s ease',
+    ...(open ? openedMixin(theme) : closedMixin(theme)),
+  },
 }));

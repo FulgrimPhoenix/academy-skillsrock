@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addCourse, deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
 
 export const coursesSlice = createSlice({
-  name: 'auth',
+  name: 'courses',
   initialState: {
     courses: [],
     course: null,

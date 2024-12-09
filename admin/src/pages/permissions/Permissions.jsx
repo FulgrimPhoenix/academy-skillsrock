@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Permission from './Permission';
+import { PermissionsHeader, PermissionsPaper, PermissionsRoot } from './Permissions.styles';
 
 import { resetState } from '~features/permissions/permissionSlice';
 import { addOrUpdatePermission } from '~features/permissions/permissionsSlice';
@@ -37,10 +38,7 @@ export const Permissions = () => {
       sortable: false,
       renderCell: params => (
         <>
-          <IconButton
-            color="primary"
-            onClick={() => handleRowClick(params.row._id)} // Pass row ID to onEdit
-          >
+          <IconButton color="primary" onClick={() => handleRowClick(params.row._id)}>
             <EditIcon />
           </IconButton>
         </>
@@ -72,64 +70,51 @@ export const Permissions = () => {
   };
 
   return (
-    <Paper>
-      <div className="permissionsTitle">
-        <h1>Permissions List</h1>
-        <Button
-          onClick={() => {
-            handleRowClick();
-          }}
-          variant="contained"
-        >
+    <PermissionsRoot>
+      <PermissionsHeader>
+        <Typography variant="h3">Permissions List</Typography>
+        <Button onClick={handleRowClick} variant="contained">
           Create New Permission
         </Button>
-      </div>
-
-      {status === 'loading' ? (
-        <CircularProgress />
-      ) : (
-        <>
-          <DataGrid
-            initialState={{
-              pagination: {
-                paginationModel: { pageSize: 10, page: 0 },
-              },
-            }}
-            getRowId={getRowId}
-            rows={permissions}
-            columns={columns}
-            sx={{ width: '100%', border: 0 }}
-          />
-
-          {open ? (
-            <Dialog
-              open={open}
-              onClose={() => {
+      </PermissionsHeader>
+      <PermissionsPaper>
+        <DataGrid
+          not
+          loading={status === 'loading'}
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 10, page: 0 },
+            },
+          }}
+          getRowId={getRowId}
+          rows={permissions}
+          columns={columns}
+        />
+      </PermissionsPaper>
+      {open && (
+        <Dialog
+          open={open}
+          onClose={() => {
+            handleClose();
+          }}
+        >
+          <DialogTitle>Permission Details</DialogTitle>
+          <DialogContent>
+            <Permission permissionId={selectedPermissionId} handleClose={handleClose} />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
                 handleClose();
               }}
+              color="primary"
             >
-              <DialogTitle>Permission Details</DialogTitle>
-              <DialogContent>
-                <Permission permissionId={selectedPermissionId} handleClose={handleClose} />
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => {
-                    handleClose();
-                  }}
-                  color="primary"
-                >
-                  Close
-                </Button>
-              </DialogActions>
-            </Dialog>
-          ) : (
-            ''
-          )}
-        </>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       )}
-
       {error && <Typography color="error">{error}</Typography>}
-    </Paper>
+    </PermissionsRoot>
   );
 };
