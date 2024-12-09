@@ -1,21 +1,19 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import authReducer from '../features/auth/authSlice';
-import coursesReducer from '../features/courses/coursesSlice';
-import dashboardReducer from '../features/dashboard/dashboardSlice';
-import permissionReducer from '../features/permissions/permissionSlice';
-import permissionsReducer from '../features/permissions/permissionsSlice';
-import userReducer from '../features/users/userSlice';
-import usersReducer from '../features/users/usersSlice';
+import { authSlice } from '~features/auth/authSlice';
+import { coursesSlice } from '~features/courses/coursesSlice';
+import { permissionSlice } from '~features/permissions/permissionSlice';
+import { permissionsSlice } from '~features/permissions/permissionsSlice';
+import { userSlice } from '~features/users/userSlice';
+import { usersSlice } from '~features/users/usersSlice';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  dashboard: dashboardReducer,
-  courses: coursesReducer,
-  permissions: permissionsReducer,
-  permission: permissionReducer,
-  users: usersReducer,
-  user: userReducer,
+  [authSlice.name]: authSlice.reducer,
+  [coursesSlice.name]: coursesSlice.reducer,
+  [permissionsSlice.name]: permissionsSlice.reducer,
+  [permissionSlice.name]: permissionSlice.reducer,
+  [usersSlice.name]: usersSlice.reducer,
+  [userSlice.name]: userSlice.reducer,
 });
 
 export default rootReducer;

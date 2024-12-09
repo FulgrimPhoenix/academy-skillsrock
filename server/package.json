@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "generate-schemas": "node scripts/generateSwaggerSchemas.js",
-    "start:dev": "NODE_ENV=development node app.mjs",
-    "start:prod": "NODE_ENV=production npm run generate-schemas && node app.mjs"
+    "start:dev": "cross-env NODE_ENV=development node app.mjs",
+    "start:prod": "cross-env NODE_ENV=production npm run generate-schemas && node app.mjs"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.4"
   }
 }

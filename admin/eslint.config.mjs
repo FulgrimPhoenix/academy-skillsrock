@@ -3,6 +3,9 @@ import eslintPluginImport from 'eslint-plugin-import';
 import jest from 'eslint-plugin-jest';
 import react from 'eslint-plugin-react';
 import globals from 'globals';
+import path from 'path';
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -40,8 +43,8 @@ export default [
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...jest.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off', // Для новых версий React
-      'react/jsx-uses-react': 'off', // Для новых версий React
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'react/prop-types': 'off',
       'import/order': [
@@ -56,7 +59,26 @@ export default [
         },
       ],
     },
+    settings: {
+      'import/resolver': {
+        alias: {
+          map: [
+            ['~app', path.resolve(__dirname, 'src/app')],
+            ['~components', path.resolve(__dirname, 'src/components')],
+            ['~features', path.resolve(__dirname, 'src/features')],
+            ['~hooks', path.resolve(__dirname, 'src/hooks')],
+            ['~pages', path.resolve(__dirname, 'src/pages')],
+            ['~routes', path.resolve(__dirname, 'src/routes')],
+            ['~services', path.resolve(__dirname, 'src/services')],
+            ['~styles', path.resolve(__dirname, 'src/styles')],
+            ['~utils', path.resolve(__dirname, 'src/utils')],
+          ],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+    },
   },
+
   {
     files: ['**/__tests__/**/*.{js,jsx}', '**/*.{spec,test}.{js,jsx}'],
     plugins: { jest },

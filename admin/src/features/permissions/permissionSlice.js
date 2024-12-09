@@ -8,7 +8,7 @@ const initialState = {
   error: null,
 };
 
-const permissionSlice = createSlice({
+export const permissionSlice = createSlice({
   name: 'permission',
   initialState,
   reducers: {
@@ -42,4 +42,3 @@ const permissionSlice = createSlice({
 });
 
 export const { resetState } = permissionSlice.actions;
-export default permissionSlice.reducer;

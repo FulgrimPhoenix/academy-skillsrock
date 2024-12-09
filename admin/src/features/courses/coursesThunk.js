@@ -1,7 +1,7 @@
 // Base URL for the API
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import apiClient from '../../utils/apiClient';
+import apiClient from '~utils/apiClient';
 
 const API_URL = '/courses';
 
