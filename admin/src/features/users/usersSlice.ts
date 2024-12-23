@@ -1,14 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addUser, deleteUser, fetchUser, fetchUsers, updateUser } from './usersThunk';
+import { IUser } from 'src/types/User.types';
+
+interface IinitialState {
+  users: IUser[];
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: null | string;
+}
+
+const initialState: IinitialState = {
+  users: [],
+  status: 'idle',
+  error: null,
+};
 
 export const usersSlice = createSlice({
   name: 'users',
-  initialState: {
-    users: [],
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
     addOrUpdateUser: (state, action) => {
       const user = action.payload;
@@ -34,7 +43,7 @@ export const usersSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Undefinded error';
       });
   },
 });
