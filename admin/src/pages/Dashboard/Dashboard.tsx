@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
-import { DashboardLayout } from '~components/DashboardLayout';
+import { DashboardLayout } from '~/components/DashboardLayout';
 
-export const Dashboard = () => {
+export const Dashboard = (): JSX.Element => {
   return (
     <div>
       <DashboardLayout>

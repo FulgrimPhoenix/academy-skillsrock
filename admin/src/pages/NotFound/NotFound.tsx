@@ -1,6 +1,6 @@
 import { Typography, Container } from '@mui/material';
 
-export const NotFound = () => {
+export const NotFound = (): JSX.Element => {
   return (
     <Container>
       <Typography variant="h2" align="center" color="textSecondary">
