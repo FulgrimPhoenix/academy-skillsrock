@@ -8,12 +8,13 @@ import { COLUMNS } from './Users.const';
 import { UsersHeader, UsersPaper, UsersRoot } from './Users.styles';
 
 import { fetchUsers } from '~features/users/usersThunk';
+import { TAppDispatch, TAppStore } from 'src/app/store';
 
 export const Users = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
-  const getRowId = row => row._id;
-  const { users = [], status } = useSelector(state => state.users);
+  const getRowId = (row: { _id: string }): string => row._id;
+  const { users = [], status } = useSelector((state: TAppStore) => state.users);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -21,7 +22,7 @@ export const Users = () => {
     }
   }, [status, dispatch]);
 
-  const createUpdateUser = userId => {
+  const createUpdateUser = (userId: any) => {
     let path = '/dashboard/add-user';
     if (userId) path = `/dashboard/update-user/${userId}`;
     navigate(path);
@@ -41,7 +42,7 @@ export const Users = () => {
           rows={users}
           columns={COLUMNS}
           getRowId={getRowId}
-          initialState={{ pagination: { page: 0, pageSize: 5 } }}
+          initialState={{ pagination: { paginationModel: { page: 0, pageSize: 5 } } }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
         />

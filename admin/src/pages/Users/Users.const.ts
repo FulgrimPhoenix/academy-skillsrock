@@ -1,4 +1,6 @@
-export const COLUMNS = [
+type TCOLUMN = { field: string; headerName: string; flex: number };
+
+export const COLUMNS: TCOLUMN[] = [
   { field: 'first_name', headerName: 'First Name', flex: 1 },
   { field: 'last_name', headerName: 'Last Name', flex: 2 },
   { field: 'role', headerName: 'Role', flex: 2 },

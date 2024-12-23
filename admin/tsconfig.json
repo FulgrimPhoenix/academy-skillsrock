@@ -20,6 +20,7 @@
     "baseUrl": "./",
     "paths": {
       "~features/*": ["./src/features/*"],
+      "~utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*", "src/types/*.d.ts"]
