@@ -1,4 +1,4 @@
-import apiClient from '~utils/apiClient';
+import apiClient from '~/utils/apiClient';
 import {Ilogin} from "./authThunk"
 
 const AuthService = {

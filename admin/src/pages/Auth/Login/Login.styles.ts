@@ -1,6 +1,7 @@
 import { styled } from '@mui/material';
+import { CSSObject } from 'styled-components';
 
-export const LoginForm: React.FC = styled('form')(({ theme }) => ({
+export const LoginForm = styled('form')(({ theme }): CSSObject => ({
   width: '400px',
   display: 'flex',
   flexDirection: 'column',
@@ -14,7 +15,7 @@ export const LoginForm: React.FC = styled('form')(({ theme }) => ({
   },
 }));
 
-export const SignInContainer: React.FC = styled('div')(({ theme }) => ({
+export const SignInContainer = styled('div')(({ theme }): CSSObject => ({
   height: '100dvh',
   width: '100dwh',
   display: 'flex',

@@ -1,29 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IauthSlice {
-  name: string;
-  initialState: {
-    isAuthenticated: string;
+interface IinitialState  {
+    isAuthenticated: boolean;
     user: null;
-    loading: false;
-    error: null;
+    loading: boolean;
+    error: string | null;
   };
-  reducers: {
-    loginRequest: (state: any) => void;
-    loginSuccess: (state: any, action: any) => void;
-    loginFailure: (state: any, action: string) => void;
-    logout: (state: any) => void;
-  };
-}
 
-export const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
+  const initialState: IinitialState = {
     isAuthenticated: !!localStorage.getItem('token'),
     user: null,
     loading: false,
     error: null,
-  },
+  }
+
+
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState: initialState,
   reducers: {
     loginRequest: state => {
       state.loading = true;
@@ -34,7 +29,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload;
     },
-    loginFailure: (state, action) => {
+    loginFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
     },

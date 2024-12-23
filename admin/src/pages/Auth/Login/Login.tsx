@@ -1,26 +1,20 @@
 import { TextField, Button, Typography, FormControl, FormLabel, Link, FormControlLabel, Checkbox } from '@mui/material';
 import Box from '@mui/material/Box';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { LoginForm, SignInContainer } from './Login.styles';
 import { ForgotPassword } from '../ForgotPassword';
 
-import { login } from '~features/auth/authThunk';
-
-type Tauth = {
-  isAuthenticated: string;
-  user: null;
-  loading: false;
-  error: null;
-};
+import { login } from '~/features/auth/authThunk';
+import { TAppDispatch, TAppStore } from '~/app/store';
 
 export const Login = (): JSX.Element => {
   // const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((state: { auth: Tauth }): Tauth => state.auth);
+  const { isAuthenticated } = useSelector((state: TAppStore): { isAuthenticated: boolean } => state.auth);
 
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
@@ -36,15 +30,25 @@ export const Login = (): JSX.Element => {
     setOpen(false);
   };
 
-  const handleSubmit = (event: SubmitEvent): void => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget as HTMLFormElement);
-    dispatch(
-      login({
-        username: data.get('email'),
-        password: data.get('password'),
-      }),
-    );
+    if (data.get('email') && data.get('password')) {
+      dispatch(
+        login({
+          username: data.get('email') as string,
+          password: data.get('password') as string,
+        }),
+      );
+    } else {
+      console.error(
+        'Not valid type of data.',
+        'Email type:',
+        typeof data.get('email'),
+        ' Password type:',
+        typeof data.get('password'),
+      );
+    }
   };
 
   const validateInputs = () => {
@@ -68,7 +72,7 @@ export const Login = (): JSX.Element => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <SignInContainer direction="column" justifyContent="space-between">
+    <SignInContainer>
       <LoginForm onSubmit={handleSubmit} noValidate>
         <Typography variant="h4" sx={{ textAlign: 'center' }}>
           Sign in
