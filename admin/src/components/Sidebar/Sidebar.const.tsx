@@ -1,9 +1,11 @@
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
-export const DRAWER_WIDTH = 240;
+type TNAVIGATION_LIST = { segment: string; title: string; icon: JSX.Element };
 
-export const NAVIGATION_LIST = [
+export const DRAWER_WIDTH: number = 240;
+
+export const NAVIGATION_LIST: TNAVIGATION_LIST[] = [
   {
     segment: '/dashboard/users',
     title: 'Users',

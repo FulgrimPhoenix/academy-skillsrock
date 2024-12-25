@@ -1,12 +1,12 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { Navbar } from '../Navbar';
 import { Sidebar } from '../Sidebar';
 import { DashboardLayoutRoot, DashBoardLayoutWrapper } from './DashboardLayout.styles';
 
-export const DashboardLayout = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+export const DashboardLayout = ({ children }: { children: ReactNode }): ReactNode => {
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   return (
     <DashboardLayoutRoot>

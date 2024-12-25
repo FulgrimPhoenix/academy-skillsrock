@@ -1,11 +1,16 @@
+import { CSSObject } from '@emotion/react';
 import { styled } from '@mui/material';
-import MuiAppBar from '@mui/material/AppBar';
+import MuiAppBar, { AppBarProps } from '@mui/material/AppBar';
 
 const DRAWER_WIDTH = 240;
 
+interface INavbarRoot extends AppBarProps {
+  open?: boolean;
+}
+
 export const NavbarRoot = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open',
-})(({ theme }) => ({
+})<INavbarRoot>(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,

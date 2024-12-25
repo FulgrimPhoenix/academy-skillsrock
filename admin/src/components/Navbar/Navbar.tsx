@@ -6,11 +6,17 @@ import { useDispatch } from 'react-redux';
 import { NavbarRoot } from './Navbar.styles';
 
 import { logout } from '~features/auth/authSlice';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 
-export const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
+interface INavbarArgs {
+  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  sidebarOpen: boolean;
+}
+
+export const Navbar = ({ setSidebarOpen, sidebarOpen }: INavbarArgs) => {
   const dispatch = useDispatch();
 
-  const handleLogout = e => {
+  const handleLogout = (e: FormEvent) => {
     e.preventDefault();
     dispatch(logout());
   };

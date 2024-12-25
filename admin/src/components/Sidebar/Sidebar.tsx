@@ -6,8 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATION_LIST } from './Sidebar.const';
 import { DrawerHeader, SidebarDrawerRoot } from './Sidebar.styles';
+import React, { Dispatch, SetStateAction } from 'react';
 
-export const Sidebar = ({ setSidebarOpen, sidebarOpen }) => {
+interface ISidebar {
+  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  sidebarOpen: boolean;
+}
+
+export const Sidebar = ({ setSidebarOpen, sidebarOpen }: ISidebar) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
