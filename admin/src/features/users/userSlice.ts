@@ -1,8 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addUser, deleteUser, fetchUser, updateUser } from './usersThunk';
+import { IUser } from 'src/types/User.types';
 
-const initialState = {
+interface IinitialState {
+  user: null | IUser;
+  status: 'idle' | 'idle' | 'fetching' | 'fetched' | 'failed' | 'succeeded';
+  error: null | string;
+}
+
+const initialState: IinitialState = {
   user: null,
   status: 'idle', // 'idle' | 'fetching' | 'fetched' | 'failed'
   error: null,
@@ -25,7 +32,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Undefinded error';
       })
       .addCase(addUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
