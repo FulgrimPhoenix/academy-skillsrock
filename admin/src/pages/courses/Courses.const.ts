@@ -1,4 +1,6 @@
-export const COLUMNS = [
+type TCOLUMNS = { field: string; headerName: string; width: number };
+
+export const COLUMNS: TCOLUMNS[] = [
   { field: 'title', headerName: 'Title', width: 130 },
   { field: 'description', headerName: 'Description', width: 250 },
   { field: 'modules', headerName: 'Modules', width: 150 },

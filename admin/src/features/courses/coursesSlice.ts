@@ -1,15 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 import { addCourse, deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
+import { ICourse } from '~types/Course.types';
+
+type TinitialState = {
+  courses: ICourse[];
+  course: null | ICourse;
+  status: 'idle' | 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: null | string;
+  totalPages: number | null;
+  currentPage: number | null;
+};
+
+const initialState: TinitialState = {
+  courses: [],
+  course: null,
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: null,
+  totalPages: null,
+  currentPage: null,
+};
 
 export const coursesSlice = createSlice({
   name: 'courses',
-  initialState: {
-    courses: [],
-    course: null,
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null,
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: builder => {
     builder
@@ -24,7 +38,7 @@ export const coursesSlice = createSlice({
       })
       .addCase(fetchCourses.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Undefinded error';
       })
       .addCase(fetchCourse.pending, state => {
         state.status = 'loading';
@@ -35,8 +49,10 @@ export const coursesSlice = createSlice({
       })
       .addCase(fetchCourse.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Undefinded error';
       })
+      // в этом моменте я не понял логику фильтрации. В компоненте по созданию курса в структуре объекта курса отсутсвовал id.
+      // Я чсейчас добавил это поле с просто пустой строкой, чтобы ts не ругался, но это костыль
       .addCase(updateCourse.fulfilled, (state, action) => {
         const index = state.courses.findIndex(course => course.id === action.payload.id);
         if (index !== -1) {

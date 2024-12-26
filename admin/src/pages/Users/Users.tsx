@@ -8,19 +8,23 @@ import { COLUMNS } from './Users.const';
 import { UsersHeader, UsersPaper, UsersRoot } from './Users.styles';
 
 import { fetchUsers } from '~features/users/usersThunk';
-import { TAppDispatch, TAppStore } from 'src/app/store';
+import { TAppDispatch, TAppState } from 'src/app/store';
 
 export const Users = () => {
   const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
   const getRowId = (row: { _id: string }): string => row._id;
-  const { users = [], status } = useSelector((state: TAppStore) => state.users);
+  const { users = [], status } = useSelector((state: TAppState) => state.users);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchUsers());
     }
   }, [status, dispatch]);
+
+  //Здесь я выключил проверку типf, т.к. в разметке подразумевается передача объекта события,
+  //что не соответсвует логике функции, которая ожидает строковое значение, в корне. У нас получается переход на ссылку с эндпоинтом [object object]
+  //Та же проблема с кнопкой создания курса
 
   const createUpdateUser = (userId: any) => {
     let path = '/dashboard/add-user';

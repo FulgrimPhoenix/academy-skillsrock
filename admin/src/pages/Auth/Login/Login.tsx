@@ -8,13 +8,13 @@ import { LoginForm, SignInContainer } from './Login.styles';
 import { ForgotPassword } from '../ForgotPassword';
 
 import { login } from '~features/auth/authThunk';
-import { TAppDispatch, TAppStore } from '~app/store';
+import { TAppDispatch, TAppState } from '~app/store';
 
 export const Login = () => {
   // const [credentials, setCredentials] = useState({ username: '', password: '' });
   const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((state: TAppStore): { isAuthenticated: boolean } => state.auth);
+  const { isAuthenticated } = useSelector((state: TAppState): { isAuthenticated: boolean } => state.auth);
 
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
