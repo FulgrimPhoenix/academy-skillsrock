@@ -5,26 +5,27 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridValidRowModel } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Permission from './Permission';
 import { PermissionsHeader, PermissionsPaper, PermissionsRoot } from './Permissions.styles';
 
 import { resetState } from '~features/permissions/permissionSlice';
 import { addOrUpdatePermission } from '~features/permissions/permissionsSlice';
 import { fetchPermissions } from '~features/permissions/permissionsThunk';
+import { Permission } from './Permission/Permission';
+import { TAppDispatch, TAppState } from '~app/store';
 
 export const Permissions = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<TAppDispatch>();
   const [open, setOpen] = useState(false);
   const [selectedPermissionId, setSelectedPermissionId] = useState(null);
   const {
     permissions = [],
     status,
     error,
-  } = useSelector(state => {
+  } = useSelector((state: TAppState) => {
     return state.permissions;
   });
 
@@ -36,7 +37,7 @@ export const Permissions = () => {
       headerName: 'Actions',
       width: 150,
       sortable: false,
-      renderCell: params => (
+      renderCell: (params: GridValidRowModel) => (
         <>
           <IconButton color="primary" onClick={() => handleRowClick(params.row._id)}>
             <EditIcon />
@@ -46,7 +47,7 @@ export const Permissions = () => {
     },
   ];
 
-  const handleClose = permission => {
+  const handleClose = (permission?: { _id: string; name: string; description: string }) => {
     setOpen(false);
     dispatch(resetState());
     if (permission) {
@@ -60,11 +61,11 @@ export const Permissions = () => {
     }
   }, [status, dispatch]);
 
-  const getRowId = row => {
+  const getRowId = (row: GridValidRowModel) => {
     return row._id;
   };
-
-  const handleRowClick = permissionId => {
+  // тут так же в функцию автоматически поступает не айди, а объект события
+  const handleRowClick = (permissionId: any) => {
     setSelectedPermissionId(permissionId);
     setOpen(true);
   };
@@ -79,7 +80,6 @@ export const Permissions = () => {
       </PermissionsHeader>
       <PermissionsPaper>
         <DataGrid
-          not
           loading={status === 'loading'}
           initialState={{
             pagination: {

@@ -13,7 +13,7 @@ import { TAppDispatch, TAppState } from '~app/store';
 export const Courses = () => {
   const dispatch = useDispatch<TAppDispatch>();
   const navigate = useNavigate();
-  const { courses = [], status } = useSelector((state: TAppState) => state);
+  const { courses = [], status } = useSelector((state: TAppState) => state.courses);
 
   useEffect(() => {
     if (status === 'idle') {

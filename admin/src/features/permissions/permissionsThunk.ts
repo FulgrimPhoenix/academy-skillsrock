@@ -5,6 +5,17 @@ import apiClient from '~utils/apiClient';
 
 const API_URL = '/permissions';
 
+type Tpermission = {
+  _id: string;
+  name: string;
+  description: string;
+};
+
+type TupdatePremissionArgs = {
+  permissionId: string;
+  updatedPermission: Tpermission;
+};
+
 // Async Thunks for fetching and creating permissions
 // Fetch all permissions
 export const fetchPermissions = createAsyncThunk('permissions/fetchPermissions', async () => {
@@ -13,13 +24,16 @@ export const fetchPermissions = createAsyncThunk('permissions/fetchPermissions',
 });
 
 // Fetch specific permission
-export const fetchPermission = createAsyncThunk('permissions/fetchPermission', async permissionId => {
-  const response = await apiClient.get(`${API_URL}/${permissionId}`);
-  return response.data;
-});
+export const fetchPermission = createAsyncThunk(
+  'permissions/fetchPermission',
+  async (permissionId: string): Promise<Tpermission> => {
+    const response = await apiClient.get(`${API_URL}/${permissionId}`);
+    return response.data;
+  },
+);
 
 // Add a new permission
-export const addPermission = createAsyncThunk('permissions/addPermission', async newPermission => {
+export const addPermission = createAsyncThunk('permissions/addPermission', async (newPermission: Tpermission) => {
   const response = await apiClient.post(API_URL, newPermission);
   return response.data;
 });
@@ -27,7 +41,7 @@ export const addPermission = createAsyncThunk('permissions/addPermission', async
 // Update a permission
 export const updatePermission = createAsyncThunk(
   'permissions/updatePermission',
-  async ({ permissionId, updatedPermission }) => {
+  async ({ permissionId, updatedPermission }: TupdatePremissionArgs) => {
     const response = await apiClient.put(`${API_URL}/${permissionId}`, updatedPermission);
     return response.data;
   },

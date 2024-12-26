@@ -2,7 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { addPermission, deletePermission, fetchPermission, updatePermission } from './permissionsThunk';
 
-const initialState = {
+type TinitialState = {
+  permission: null | {
+    _id: string;
+    name: string;
+    description: string;
+  };
+  status: 'idle' | 'fetching' | 'fetched' | 'failed' | 'succeeded';
+  error: null | string;
+};
+
+const initialState: TinitialState = {
   permission: null,
   status: 'idle', // 'idle' | 'fetching' | 'fetched' | 'failed'
   error: null,
@@ -10,7 +20,7 @@ const initialState = {
 
 export const permissionSlice = createSlice({
   name: 'permission',
-  initialState,
+  initialState: initialState,
   reducers: {
     resetState: () => initialState,
   },
@@ -25,7 +35,7 @@ export const permissionSlice = createSlice({
       })
       .addCase(fetchPermission.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Undefinded error';
       })
       .addCase(addPermission.fulfilled, (state, action) => {
         state.status = 'succeeded';

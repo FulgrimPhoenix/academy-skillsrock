@@ -1,25 +1,41 @@
 import { Button, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addPermission, fetchPermission, updatePermission } from '../../../features/permissions/permissionsThunk';
+import { TAppDispatch, TAppState } from '~app/store';
 
-export const Permission = ({ permissionId, handleClose }) => {
-  const dispatch = useDispatch();
-  const { permission = {}, status, error } = useSelector(state => state.permission);
+interface IPermissionArgs {
+  permissionId: string | null;
+  handleClose: (arg: { _id: string; name: string; description: string }) => void;
+}
 
-  const [formData, setFormData] = useState({
+interface IformData {
+  _id: string;
+  name: string;
+  description: string;
+}
+
+export const Permission = ({ permissionId, handleClose }: IPermissionArgs) => {
+  const dispatch = useDispatch<TAppDispatch>();
+  const { permission, status, error } = useSelector((state: TAppState) => state.permission);
+
+  const [formData, setFormData] = useState<IformData>({
+    _id: '',
     name: '',
     description: '',
   });
 
   useEffect(() => {
-    dispatch(fetchPermission(permissionId));
+    if (permissionId !== null) {
+      dispatch(fetchPermission(permissionId));
+    }
   }, []);
 
   useEffect(() => {
     if (permissionId && permission) {
       setFormData({
+        _id: permission._id || '',
         name: permission.name || '',
         description: permission.description || '',
       });
@@ -28,11 +44,13 @@ export const Permission = ({ permissionId, handleClose }) => {
 
   useEffect(() => {
     if (status === 'succeeded') {
-      handleClose(permission);
+      if (permission !== null) {
+        handleClose(permission);
+      }
     }
   }, [status]);
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
@@ -40,7 +58,7 @@ export const Permission = ({ permissionId, handleClose }) => {
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (permissionId) {
       dispatch(updatePermission({ permissionId, updatedPermission: formData }));

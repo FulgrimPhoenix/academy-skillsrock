@@ -6,7 +6,7 @@ import { ICourse } from '~types/Course.types';
 type TinitialState = {
   courses: ICourse[];
   course: null | ICourse;
-  status: 'idle' | 'idle' | 'loading' | 'succeeded' | 'failed';
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: null | string;
   totalPages: number | null;
   currentPage: number | null;
