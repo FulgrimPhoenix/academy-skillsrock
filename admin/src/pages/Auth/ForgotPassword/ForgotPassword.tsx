@@ -6,14 +6,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export function ForgotPassword({ open, handleClose }) {
+interface IForgotPassword {
+  open: boolean;
+  handleClose: () => void;
+}
+
+export function ForgotPassword({ open, handleClose }: IForgotPassword): JSX.Element {
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       PaperProps={{
         component: 'form',
-        onSubmit: event => {
+        onSubmit: (event: MouseEvent) => {
           event.preventDefault();
           handleClose();
         },
