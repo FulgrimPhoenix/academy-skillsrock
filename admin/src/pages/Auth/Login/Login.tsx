@@ -41,13 +41,7 @@ export const Login = () => {
         }),
       );
     } else {
-      console.error(
-        'Not valid type of data.',
-        'Email type:',
-        typeof data.get('email'),
-        ' Password type:',
-        typeof data.get('password'),
-      );
+      console.error('Not valid type of data.');
     }
   };
 
