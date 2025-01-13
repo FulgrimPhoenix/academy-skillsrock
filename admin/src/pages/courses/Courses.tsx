@@ -1,19 +1,18 @@
 import { Button, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { COLUMNS } from './Courses.const';
 import { CoursesHeader, CoursesPaper, CoursesRoot } from './Courses.styles';
 
 import { fetchCourses } from '~features/courses/coursesThunk';
-import { TAppDispatch, TAppState } from '~app/store';
+import { useAppDispatch, useAppSelector } from '~app/store';
 
 export const Courses = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { courses = [], status } = useSelector((state: TAppState) => state.courses);
+  const { courses = [], status } = useAppSelector(state => state.courses);
 
   useEffect(() => {
     if (status === 'idle') {

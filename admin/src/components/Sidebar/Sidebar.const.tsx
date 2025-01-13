@@ -3,7 +3,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 type TNAVIGATION_LIST = { segment: string; title: string; icon: JSX.Element };
 
-export const DRAWER_WIDTH: number = 240;
+export const DRAWER_WIDTH = 240;
 
 export const NAVIGATION_LIST: TNAVIGATION_LIST[] = [
   {

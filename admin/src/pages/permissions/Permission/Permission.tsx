@@ -1,14 +1,9 @@
 import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { addPermission, fetchPermission, updatePermission } from '../../../features/permissions/permissionsThunk';
-import { TAppDispatch, TAppState } from '~app/store';
-
-interface IPermissionArgs {
-  permissionId: string | null;
-  handleClose: (arg: { _id: string; name: string; description: string }) => void;
-}
+import { useAppDispatch, useAppSelector } from '~app/store';
+import { IPermissionArgs } from './Premission.types';
 
 interface IformData {
   _id: string;
@@ -17,8 +12,8 @@ interface IformData {
 }
 
 export const Permission = ({ permissionId, handleClose }: IPermissionArgs) => {
-  const dispatch = useDispatch<TAppDispatch>();
-  const { permission, status, error } = useSelector((state: TAppState) => state.permission);
+  const dispatch = useAppDispatch();
+  const { permission, status, error } = useAppSelector(state => state.permission);
 
   const [formData, setFormData] = useState<IformData>({
     _id: '',

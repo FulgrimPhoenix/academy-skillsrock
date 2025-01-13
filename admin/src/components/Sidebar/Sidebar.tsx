@@ -9,7 +9,7 @@ import { DrawerHeader, SidebarDrawerRoot } from './Sidebar.styles';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface ISidebar {
-  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setSidebarOpen: (arg: boolean) => void;
   sidebarOpen: boolean;
 }
 

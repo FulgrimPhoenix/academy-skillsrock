@@ -1,8 +1,8 @@
 import { styled, Theme } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 
-const DRAWER_WIDTH: number = 240;
-const COLLAPSED_WIDTH: number = 60;
+const DRAWER_WIDTH = 240;
+const COLLAPSED_WIDTH = 60;
 
 const openedMixin = (theme: Theme) => ({
   width: DRAWER_WIDTH,
@@ -22,7 +22,7 @@ const closedMixin = (theme: Theme) => ({
   }),
 });
 
-export const DrawerHeader = styled('div')<{ theme?: Theme }>(({ theme }) => ({
+export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',

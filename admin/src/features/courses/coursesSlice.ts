@@ -1,16 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
-import { addCourse, deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
-import { ICourse } from '~types/Course.types';
-
-type TinitialState = {
-  courses: ICourse[];
-  course: null | ICourse;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: null | string;
-  totalPages: number | null;
-  currentPage: number | null;
-};
+import { deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
+import { TinitialState } from '~types/Course.types';
 
 const initialState: TinitialState = {
   courses: [],

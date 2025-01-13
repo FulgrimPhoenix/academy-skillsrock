@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/react';
 import { styled } from '@mui/material';
 import MuiAppBar, { AppBarProps } from '@mui/material/AppBar';
 

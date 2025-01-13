@@ -1,20 +1,20 @@
 import { TextField, Button, Typography, FormControl, FormLabel, Link, FormControlLabel, Checkbox } from '@mui/material';
 import Box from '@mui/material/Box';
 import { FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 
 import { LoginForm, SignInContainer } from './Login.styles';
 import { ForgotPassword } from '../ForgotPassword';
 
 import { login } from '~features/auth/authThunk';
-import { TAppDispatch, TAppState } from '~app/store';
+import { useAppDispatch, useAppSelector } from '~app/store';
 
 export const Login = () => {
   // const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const dispatch = useDispatch<TAppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((state: TAppState): { isAuthenticated: boolean } => state.auth);
+  const { isAuthenticated } = useAppSelector(state => state.auth);
 
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');

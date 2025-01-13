@@ -1,13 +1,12 @@
 import { TextField, Button, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { TAppDispatch } from '~app/store';
+import { useAppDispatch } from '~app/store';
 
 import { addCourse } from '~features/courses/coursesThunk';
 import { ICourse } from '~types/Course.types';
 
 export const Course = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const dispatch = useAppDispatch();
 
   const [courseData, setCourseData] = useState<ICourse>({
     id: '',

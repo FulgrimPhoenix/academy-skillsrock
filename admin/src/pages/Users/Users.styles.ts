@@ -1,28 +1,21 @@
-import { CSSObject } from '@emotion/react';
 import { Paper, styled } from '@mui/material';
 
-const UserRootStyle: CSSObject = {
+export const UsersRoot = styled('div')({
   height: '100%',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: 20,
-};
+});
 
-const UsersHeaderStyle: CSSObject = {
+export const UsersHeader = styled('div')({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-};
+});
 
-const UsersPaperStyle: CSSObject = {
+export const UsersPaper = styled(Paper)({
   flexGrow: 1,
   height: '100%',
-};
-
-export const UsersRoot = styled('div')(UserRootStyle);
-
-export const UsersHeader = styled('div')(UsersHeaderStyle);
-
-export const UsersPaper = styled(Paper)(UsersPaperStyle);
+});

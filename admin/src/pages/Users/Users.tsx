@@ -1,20 +1,19 @@
 import { Button, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { COLUMNS } from './Users.const';
 import { UsersHeader, UsersPaper, UsersRoot } from './Users.styles';
 
 import { fetchUsers } from '~features/users/usersThunk';
-import { TAppDispatch, TAppState } from 'src/app/store';
+import { useAppDispatch, useAppSelector } from 'src/app/store';
 
 export const Users = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const getRowId = (row: { _id: string }): string => row._id;
-  const { users = [], status } = useSelector((state: TAppState) => state.users);
+  const { users = [], status } = useAppSelector(state => state.users);
 
   useEffect(() => {
     if (status === 'idle') {

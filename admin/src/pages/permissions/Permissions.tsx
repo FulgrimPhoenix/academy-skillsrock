@@ -7,7 +7,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import { DataGrid, GridValidRowModel } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { PermissionsHeader, PermissionsPaper, PermissionsRoot } from './Permissions.styles';
 
@@ -15,17 +14,17 @@ import { resetState } from '~features/permissions/permissionSlice';
 import { addOrUpdatePermission } from '~features/permissions/permissionsSlice';
 import { fetchPermissions } from '~features/permissions/permissionsThunk';
 import { Permission } from './Permission/Permission';
-import { TAppDispatch, TAppState } from '~app/store';
+import { useAppDispatch, useAppSelector } from '~app/store';
 
 export const Permissions = () => {
-  const dispatch = useDispatch<TAppDispatch>();
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [selectedPermissionId, setSelectedPermissionId] = useState(null);
   const {
     permissions = [],
     status,
     error,
-  } = useSelector((state: TAppState) => {
+  } = useAppSelector(state => {
     return state.permissions;
   });
 
