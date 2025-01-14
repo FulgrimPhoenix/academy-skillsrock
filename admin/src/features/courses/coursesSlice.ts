@@ -1,7 +1,16 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
 import { deleteCourse, fetchCourse, fetchCourses, updateCourse } from './coursesThunk';
-import { TinitialState } from '~types/Course.types';
+import { ICourse, TcourseStatus } from '~types/course.types';
+
+export type TinitialState = {
+  courses: ICourse[];
+  course: null | ICourse;
+  status: TcourseStatus;
+  error: null | string;
+  totalPages: number | null;
+  currentPage: number | null;
+};
 
 const initialState: TinitialState = {
   courses: [],

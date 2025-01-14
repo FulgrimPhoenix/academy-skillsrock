@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addUser, deleteUser, fetchUser, updateUser } from './usersThunk';
-import { IUser } from 'src/types/User.types';
+import { IUser, TuserStatus } from '~types/user.types';
 
 interface IinitialState {
   user: null | IUser;
-  status: 'idle' | 'idle' | 'fetching' | 'fetched' | 'failed' | 'succeeded';
+  status: TuserStatus;
   error: null | string;
 }
 

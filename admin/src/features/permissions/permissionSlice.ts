@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addPermission, deletePermission, fetchPermission, updatePermission } from './permissionsThunk';
+import { TpermissionStatus } from '../../types/permissions.types';
 
 type TinitialState = {
   permission: null | {
@@ -8,7 +9,7 @@ type TinitialState = {
     name: string;
     description: string;
   };
-  status: 'idle' | 'fetching' | 'fetched' | 'failed' | 'succeeded';
+  status: TpermissionStatus;
   error: null | string;
 };
 

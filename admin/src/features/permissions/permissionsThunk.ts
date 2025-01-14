@@ -2,14 +2,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import apiClient from '~utils/apiClient';
+import { Tpermission } from '../../types/permissions.types';
 
 const API_URL = '/permissions';
-
-type Tpermission = {
-  _id: string;
-  name: string;
-  description: string;
-};
 
 type TupdatePremissionArgs = {
   permissionId: string;

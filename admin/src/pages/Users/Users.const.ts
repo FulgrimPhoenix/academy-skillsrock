@@ -1,4 +1,6 @@
-export const COLUMNS: { field: string; headerName: string; flex: number }[] = [
+import { Tcolumn } from "~types/user.types";
+
+export const COLUMNS: Tcolumn[] = [
   { field: 'first_name', headerName: 'First Name', flex: 1 },
   { field: 'last_name', headerName: 'Last Name', flex: 2 },
   { field: 'role', headerName: 'Role', flex: 2 },

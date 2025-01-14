@@ -8,3 +8,7 @@ export interface IUser {
   __v: number;
   _id: string;
 }
+
+export type TuserStatus = 'idle' | 'loading' | 'fetching' | 'fetched' | 'failed' | 'succeeded';
+
+export type Tcolumn = { field: string; headerName: string; flex: number };

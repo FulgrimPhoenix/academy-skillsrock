@@ -1,16 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchPermissions } from './permissionsThunk';
-
-type Tpermission = {
-  _id: string;
-  name: string;
-  description: string;
-};
+import { Tpermission, TpermissionStatus } from '../../types/permissions.types';
 
 type TinitialState = {
   permissions: Tpermission[];
-  status: 'idle' | 'idle' | 'fetching' | 'fetched' | 'failed' | 'succeeded' | 'loading';
+  status: TpermissionStatus;
   error: null | string;
 };
 

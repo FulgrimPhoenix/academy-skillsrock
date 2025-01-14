@@ -8,8 +8,8 @@ export const store = configureStore({
 });
 
 type TAppState = ReturnType<typeof store.getState>;
-type TAppDispatch = typeof store.dispatch;
-// не смог разобраться зачем нам эта конструкция. Для получения типов этих функций?
+export type TAppDispatch = typeof store.dispatch;
+
 export const useAppSelector = useSelector.withTypes<TAppState>();
 export const useAppDispatch = useDispatch.withTypes<TAppDispatch>();
 export const useAppStore = useStore.withTypes<typeof store>();

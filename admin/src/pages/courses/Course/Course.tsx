@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '~app/store';
 
 import { addCourse } from '~features/courses/coursesThunk';
-import { ICourse } from '~types/Course.types';
+import { ICourse } from '~types/course.types';
 
 export const Course = () => {
   const dispatch = useAppDispatch();

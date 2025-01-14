@@ -7,11 +7,6 @@ export interface ICourse {
   students: string;
 }
 
-export type TinitialState = {
-  courses: ICourse[];
-  course: null | ICourse;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: null | string;
-  totalPages: number | null;
-  currentPage: number | null;
-};
+
+
+export type TcourseStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
