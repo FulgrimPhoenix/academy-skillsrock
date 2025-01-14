@@ -22,7 +22,7 @@ export const Permission = ({ permissionId, handleClose }: IPermissionArgs) => {
   });
 
   useEffect(() => {
-    if (permissionId !== null) {
+    if (typeof permissionId === "string") {
       dispatch(fetchPermission(permissionId));
     }
   }, []);
@@ -39,7 +39,7 @@ export const Permission = ({ permissionId, handleClose }: IPermissionArgs) => {
 
   useEffect(() => {
     if (status === 'succeeded') {
-      if (permission !== null) {
+      if (permission !== null && handleClose) {
         handleClose(permission);
       }
     }
