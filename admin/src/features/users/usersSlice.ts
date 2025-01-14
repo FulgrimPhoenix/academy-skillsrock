@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addUser, deleteUser, fetchUser, fetchUsers, updateUser } from './usersThunk';
-import { IUser, TuserStatus } from '~types/user.types';
+import { IUser, TuserStatus } from '~types/User.types';
 
 interface IinitialState {
   users: IUser[];

@@ -1,6 +1,6 @@
 // Base URL for the API
 import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '~types/user.types';
+import { IUser } from '~types/User.types';
 
 import apiClient from '~utils/apiClient';
 

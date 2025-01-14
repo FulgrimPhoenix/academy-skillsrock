@@ -1,4 +1,4 @@
-import { Tcolumn } from "~types/user.types";
+import { Tcolumn } from "~types/User.types";
 
 export const COLUMNS: Tcolumn[] = [
   { field: 'first_name', headerName: 'First Name', flex: 1 },
