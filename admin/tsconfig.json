@@ -1,26 +1,39 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "typeRoots": ["node_modules/@types", "src/types"],
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "target": "ES2020",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "types": ["@testing-library/jest-dom", "node"],
+    /* Bundler mode */
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true,
     "baseUrl": "./",
     "paths": {
+      "~components/*": ["./src/components/*"],
+      "~pages/*": ["./src/pages/*"],
       "~features/*": ["./src/features/*"],
+      "~hooks/*": ["./src/hooks/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~routes/*": ["./src/routes/*"],
+      "~styles/*": ["./src/styles/*"],
+      "~types/*": ["./src/types/*"],
+      "~utils/*": ["./src/utils/*"],
+      "~app/*": ["./src/app/*"]
     }
   },
-  "include": ["src/**/*", "src/types/*.d.ts"]
+  "include": ["src", "craco.config.js"]
 }
